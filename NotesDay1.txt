@@ -1,0 +1,226 @@
+Day 1:
+------
+	Sudhakar Palanivelu
+	
+
+Linux Basics and Command Line:
+------------------------------
+	Basically You can have...
+	1. Linux installed directly. (Ubuntu, CentOS, Fedora, OpenSUSE, Kali)
+	2. Install Linux on WSL(Windows Subsystem for Linux)
+	3. Installing virtual machines like VMWare (Paid), Oracle Virtual Machine(free). 
+		
+		If You are working on commands and basic programming using any language all three installations will support.
+		
+		But if you are working on programs at system(Kernel) level then only option 1 and 3 will support.
+===========================================================
+History of OS:
+--------------
+	Ken Thompson --> UNIX in 1969 in Bell Labs.
+	UNIX was re-written using C in 1974.
+	University of California, Berkeley.
+	
+	BSD version of UNIX 
+		mac uses this flavor of UNIX
+	In 1980's
+		Solaris by Sun Microsystems 
+		HP-UX --> HP 
+		AIX --> IBM
+		
+	In order to bring in Standardized UNIX... IEEE introduced POSIX (Portable OS Interface for UNIX)
+	
+	After POSIX standard was introduced., every UNIX Flavors started compliance to this standard.
+	
+	So by 1990, POSIX was the defacto standard for all UNIX like OS's.
+	
+	If you observe, People coming from Computer Science background, they study OS Concepts as their one of the subject.,
+	
+	OS By Tanenbaum --> Minix
+	OS Concepts by galvin, silbershautz (Dinosours as diagrams on the cover)
+	
+	---------------------------------------------
+	1990 Linus Trovalds studying in University of Helsinki, Finland wanted to introduce Minix like OS for PCs wrote it and published(released) in news group.
+		os.minix.newsgroup
+		
+		This is the first version of Linux is 0.01 in 1991.
+		
+		This Linux was the core part of the OS we call it as Kernel.
+		
+		There was another project called GNU started by Richard Stallman., who wanted to create UNIX like OS. When Linus Trovalds released his Linux, many components of GNU system were available except a complete Kernel which was missing. So Linux filled this gap, allowing users to combine GNU software with Linux kernel to create a fully functional(working) OS.
+		
+		This Partenship is referred to as GNU/Linux.
+	
+	In Earlier days there... In 1990's slackware, Debian Linux flavors were available.
+
+	Later in late 1990's, RedHat Linux(Introduced RedHat, fedora later CentOS), SUSE were popular. 
+	
+	in 2004. Ubuntu was introduced as desktop version of linux., by bringing Linux to masses who were using PC.
+===========================================================
+Desktop Environments(DE)
+------------------------
+1.	GNOME is the default desktop environment for major Linux distributions like Ubuntu, CentOS, Fedora, Debian
+
+	This environment is heavy of CPU, Needs more RAM 8G+. 	
+	one of the more stable environment.
+	
+2.	KDE Plasma--> is one of the most customizable DE in Linux
+	You can change anything --> layout, themes, animation or widgets.
+	
+	Ligweight compared to GNOME
+	can be used by systems with 4G+ 
+	
+3. XFCE
+		One of the fastest and lightest DE. 
+		More focus on performance and stability
+		
+		If you want to use it on older Hardware with 2G+ Ram.
+		Older, low-end hardware.
+=============================================================
+CLI --> Terminal (Terminal Emulator)
+====================================
+	Povides a command prompt(string) 
+	CWD(current working directory)
+	
+	prompt string: CWD $ Commands here
+	
+	Command Syntax:
+	---------------
+		command [optional string/character] arguments
+		
+		some commands will have default options and default arguments.
+		
+	for example:
+		ls 
+		
+		ls --> list files and directories in your CWD
+			here 
+		
+		ls -l --> 
+			here - option 
+			l --> long listing			
+		
+		cd --> Change directory 
+			entering into a directory
+		pwd --> print/present working directory 	
+		mkdir --> 
+		touch -->
+--------------------------------------------------
+	In our days, there was no google to start with. If you want to understand any commands or functions in UNIX/Linux people used to say rtfm(read the f..k... manual).
+	
+	In UNIX/Linux manual refers to man command.
+	
+	man is command for manual page.
+	Syntax:
+		man page command/content
+	
+	page or page number or section number refers to the section in the manual page set.
+
+	Remember UNIX/Linux is used by different types of users.
+
+		Normal User (without sudo / root access)
+		Adminstrator user(with sudo / root access)	 
+		programmer 
+		games
+		file formats
+		file type
+	
+	
+	man 1 intro /command 
+		--> user level command which does not require sudo access.
+	man 2 intro /command 
+		--> accessing library functions section system calls 
+	man 3 intro /command 
+		--> accessing library functions section C standard Library
+	man . intro /command
+	man . intro /command
+	man . intro /command
+	
+	man 8 intro / command
+============================================================
+Creating, Listing, Deleting Files and Directories:
+--------------------------------------------------
+	rm --> removes files 
+	rmdir --> removes empty folder/directory
+	rm -r dirName --> Removes non-empty folder/directory along with its files recursively.
+
+Copying, Moving, Removing Files:
+--------------------------------
+	cp --> copy file 
+	cp -r srcdir destDir --> copy files along with srcdir directory into destDir directory recursively 
+	cp file1 file2 file3 dirName --> copy multiple files into a single directory
+	
+	mv src dest --> moves source src into dest file 
+		--> equal to cut and paste 
+------------------------------------------------	
+Editor:
+-------
+	Helps to edit/create or modify contents in a file 
+	
+	basic file creation...
+	----------------------
+		nano filename 
+		
+		^ --> Ctrl 
+		M --> Alt 
+		
+		^O --> Ctrl + o
+		M-U --> alt U --> Undo  
+		M-E --> alt E --> Redo 
+		^6 --> ctrl + 6 --> Mark selection (starting point)
+		M-6 --> Alt + 6 --> copy selected text 
+		
+Vim Modes and Navigation:
+------------------------	
+	vi filename
+		Opens the file in navigation mode(moving cursor).
+		for example:
+		  works like arrow(navigation) keys 
+			h  --> left
+			j  --> down
+			k  --> up 
+			l  --> right 
+
+			w --> next word 
+			b --> previous word 
+		
+			G --> Last line of the file 
+			gg --> first line of the file 
+			0 --> first character in the line 
+			$ --> End of the line (last character)
+			
+			yy --> yank(copy) current line 
+			2yy --> copy 2 lines from current line 
+
+			dd --> Delete / cut current line 
+			2dd --> Delete/cut 2 lines from current line 
+			
+			p  --> paste (next line)
+			P  --> Paste (one line above)
+	
+			u --> Undo 
+			Ctrl + r --> Redo 
+	Last line command mode:
+		when you type : (colon) from navigation mode 
+			w --> write or save 
+			w filename --> save as filename
+			q --> quit 
+			q! --> force quit 
+			w! --> Save forcefully 
+			x --> save and quit 
+		
+	Edit mode:
+		Where you can start typing the contents in the file. You can press any one of the following keys from navigation mode.
+		
+		i --> Insert before the current cursor position 
+		I --> Insert at the begining of the current line 
+		a --> append before the current cursor position 
+		A --> append at the end of the current line 
+		o --> Inserting at Next line 
+		O --> Inserting one line above 
+		R --> Replace (Insert key in Windows)
+		s --> Substitute single character 
+		S --> Substitute single line
+	--------------------------------
+		After typing the contents come out of edit mode by pressing esc key. Once you press esc key, you move to navigation mode.
+		
+=========================================================
