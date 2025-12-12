@@ -1,0 +1,311 @@
+Day 2:
+------
+	Remote System Access
+	
+Source Code Management with Git
+	Version Control with Git
+		Git Introduction
+			Why Version Control?
+			Git Installation and Configuration
+		Git Basics
+			Initializing a Repository (git init)
+			Staging and Committing Changes (git add, git commit)	
+		Git Operations and Workflow
+			Managing Changes
+				Viewing Commit History (git log)
+				Undoing Changes (git revert, git reset)
+			Branching in Git
+				Creating and Switching Branches (git branch, git checkout)
+				Basic Merging Techniques
+			Branching and Merging
+				Advanced Branching Strategies
+				Feature Branching, Hotfix Branches
+			Complex Merging Techniques
+				Resolving Complex Merge Conflicts
+				Rebase vs Merge
+			Collaborative Development with Git
+				Collaborative Workflows in Git
+				Forking and Cloning Repositories
+				Managing Collaborative Changes
+			Working with Branches Remotely
+				Pushing and Pulling Branches
+				Remote Branch Management
+			Code Review and Collaboration Practices
+			Utilizing Pull Requests
+				Creating and Managing Pull Requests
+				Code Review Process
+
+	Shell Scripting with Bash
+		Bash Scripting Basics
+		Shell Scripting Basics
+		Creating and Running Shell Scripts
+		Script File Structure
+		Making Scripts Executable
+		Basic Shell Script Examples
+	Variables and Data Types
+		Environment Variables
+		Custom Variables
+		Data Types and Declaration
+		Working with Strings and Numbers
+==============================================================
+Remote System Access
+	telnet ---> Initial Remote login 
+	rlogin ---> Remote login with simple encryption
+	ssh ---> Secured Shell (S Sh) --> 
+
+	Initially ssh client was not provided in Windows. Third party tools like putty, xterm were used.
+
+	scp sudhakar@192.168.1.8:forTwo.sh .
+
+	scp -r sudhakar@192.168.1.8:*.tgz .
+==========================================================
+ssh-keygen [-t dsa | ecdsa | ed25519 | rsa] 
+=========================================================
+Source Code Management with Git
+
+	Source Code are programs written in original programming language(C/C++/Python/Java... or scripting perl)
+	
+	When project involves multiple people contributing/writing their part of the project/source code.
+
+	That means a project will have multiple source code(files).
+	
+	When multiple files being edited by multiple  people imagine the scenario like who modified which file and who is responsible to monitor which modules(part of the project).
+==========================================================	
+Why do we need version Control?
+
+		Version control helps developers to 
+			track changes to files over time 
+			Undo mistakes
+			Work in parallel using branches 
+			Collaborate without overwriting each other 
+			Maintains complete project History 
+		for Example:
+			If you accidentally delete a function --> git lets you to restore to the earlier version by using  the following command.
+				git checkout 
+				or 
+				git restore 
+
+Installation of git:
+--------------------	
+	Install git command in windows:
+		download gitbash and install it 
+	in Linux:
+		sudo apt install git 
+	in macOS:
+		brew install git 
+	
+Verify whether git is installed:
+-------------------------------
+		git --version 
+		output in my system:
+			git version 2.33.0.windows.1
+
+Basic Configuration:
+--------------------
+first thing to do after installing before creating a local repository or cloning a remote repository is to initialize the initial configuration:
+
+	git config --global user.name "Sudhakar Palanivelu"
+	git config --global user.email "sudhakar.p1@gmail.com"
+	git config --local code.editor "code --wait"
+	
+Task #1:
+========
+1. Create a new repository in your github account called testOne 
+	upload a file notesTest.txt containing 
+		one
+		two
+		three 
+			as text contents 
+			
+	a. clone the repository into your local folder testGit
+	b. update the file notesTest.txt by adding 
+		four
+		five
+			save the file 
+	c. upload this file into your github repository
+		verify the same by viewing in your github.
+==========================================================	
+1. creating/initialize an empty repository:
+		md gitPractice
+		cd gitPractice
+		git init 
+2. Add some files into this empty repository and commit the changes.
+	edit a file, save it in your empty folder.
+	
+	git add filename 
+	git status 
+	
+	git commit -m "comments here"
+	git status 
+	
+	Here remember:
+		git add filename 
+			will add file filename into the stage area.
+		git add .
+			will add everything(every file and folder newly added or modified) into the stage are 
+		After adding files/folders perform commit
+
+3. 	To view commit history use 
+		git log 
+		git log --oneline 
+		
+4. Undo changes:
+		remove entry from the staged area. i.e., the added file but not committed
+			git restore --staged notesTwo.txt
+		
+		restore file to last commited version 
+			git restore notesTwo.txt
+		
+		undo with revert command 
+			git revert <commit-id>
+			This will create a new commit that reverses a previous commit.
+-------------------------------------------------------
+	main tree :
+		Imagine you want to add a feature.
+		There might be a bug that needs immediate fixing(hot fix)
+		
+5. Branching in Git:
+		git branch addNewFeature
+		git switch addNewFeature
+		or 
+		git checkout -b addNewFeature
+		
+			you can perform normal adding and commit operations to the branch.
+			
+6. Merging a branch.
+		switch to main branch and then use merge command.
+		
+		git switch main 
+		git merge addNewFeature
+		
+		verify the same:
+			git log --oneline
+7. Deleting a branch
+		Deleting a branch after merging the branch.
+		
+		git branch -d addNewFeature
+		
+8. Merge Conflict Practice
+	Scenario:
+		Create a file notesTwo.txt	
+		Modify line 1 in main branch 
+		Modify the SAME line in featureOne
+		Try merging featureOne into main
+		Resolve conflict manually		
+	solution(How to resolve):
+		Edit file to desired content (choose one or combine).
+		git add notesTwo.txt 
+		git commit		
+
+9. Undo Last Commit using reset command(Soft/Hard Reset)
+	Task:
+		Make a commit
+		Undo it using:
+			git reset --soft HEAD~1 → keep changes
+			git reset --hard HEAD~1 → delete changes
+	Practice both.
+
+10. Rebase vs Merge
+	Merge:
+		1. Combines both the branches by creating a new merge commit. 
+		2. Keeps the history intact(as it is)
+		3. History becomes branchy
+		
+	Rebase:
+		1. Rewrite your branch's history by placing your commits on top of another branch 
+		2. Create a new clean, lineary history
+		3. Does not create a merge commit (unless you have conflicts).
+	
+		git branch featureOne #checkout
+		git rebase main 
+	
+		When to use rebase:
+			you want a clean, linear commit history 
+			You are working on your own local branch 
+			You want your feature branch to up-to-date before merging
+		When to choose merge:
+			1.You want to preserve complete history 
+			2. You are working in a team
+			3. History accuracy matters(like tracking how brances diverged).
+			4. You are merging shared branches
+========================================================
+git pull origin main #merge remote into local 
+git push #merge local to remote 
+
+11. Forking and Cloning
+-----------------------
+	git clone repositoryURL 
+		this is used to download a full copy of a repository (including its history) to your local machine.
+	
+	When you clone:
+		you get your own local working copy 
+		you can commit locally 
+		your are connected to the original repo as origin/master
+	Clone is used when:
+		You have permission to push directly 
+		you are working within the same project/team 
+		That means you are not modifying some one else's open-source project.
+		
+====================================
+	A fork is your own server-side copy of some one else's repository. usually on GitHub/GitLab/Bitbucket
+	
+	When you fork:
+		you create your own copy on GitHub. 
+		You can push freely to your fork not the original. 
+		You have to open Pull requests to propose changes to the original repo 
+	
+	Fork is used when:
+		you are contributing/writing to open-source projects
+		You do not have write permission to the original repo.
+		You want an separate copy for experimentation.
+		
+What is a Pull-Request(PR)?
+	A pull-request is a request to merge your fork(Branch) into the main(Branch).
+	When is it used:
+		1. Collaborate (Contribute into the project)
+		2. Your code to be reviewed by your Peers.
+		3. Discuss changes 
+		4. Ensuring your code has quality before merging 
+		5. Keeping the history clean.
+	
+	When do you create a Pull-Request (PR)?
+		1. When you have completed work on a feature(Branch)
+		2. The changes has been reviewed
+	
+	Steps involved:
+		1. Create a feature branch 
+		2. Make changes by adding and commit 
+		3. Push to your remote repo 
+		
+	CI/CD Checks:
+		1. Must pass test cases 
+		3. Your code has to follow the coding guidelines along with stye.
+		i.e., if something fails, fix --> push --> rerun checks.
+		
+Example of GitHub PR Workflow:
+------------------------------
+	Developer --> Creates feature branch --> Push --> Opens PR
+        ↓
+	Reviewers --> Comment --> Request changes --> Approve
+        ↓
+	CI/CD --> Run tests --> Lint --> Build --> Security scan
+        ↓
+	Merge --> Squash --> Delete branch --> PR closed		
+=========================================================	
+Assignment 1: Initialize a new Git repository in a directory of your choice. Add a simple text file to the repository and make the first commit.
+
+Assignment 2: Branch Creation and Switching
+Create a new branch named 'feature' and switch to it. Make changes in the 'feature' branch and commit them.
+
+Assignment 3: Feature Branches and Hotfixes
+Create a 'hotfix' branch to fix an issue in the main code. Merge the 'hotfix' branch into 'main' ensuring that the issue is resolved.
+=============================================================
+What is myScript file?
+	It is a normal text file consisting of sequence of commands (UNIX/Linux commands).
+
+	You want to run it?
+		
+		bash (shell name) myScript
+		
+		
+
