@@ -224,3 +224,74 @@ Vim Modes and Navigation:
 		After typing the contents come out of edit mode by pressing esc key. Once you press esc key, you move to navigation mode.
 		
 =========================================================
+=========================================================
+Basic File System Structure and Permissions
+	Inside root directory (/) folders containing files related to system are stored.
+	
+	/boot --> Boot image along with boot loader configuration files are stored here 
+	/bin  --> binary folder containing the files/commands 
+	/etc --> configuration for services and application at system level is stored here as plain text file 
+	/home --> home directory for any non-root user are stored here
+	/usr --> here it contains sub directory structures for lib, bin, include and other directories
+	/lib --> contains system level library files (.a and .so files for C/C++ library)
+	/tmp  --> used for storing temporary files/folders while appication is running 
+	/root  --> home directory to store root user.
+	/mnt --> Mount folder for mounting external files 
+	/dev --> for every hardware device installed an entry as a file is made here 
+	
+======================================================	
+File Permissions and Ownership
+------------------------------
+permissions:
+	r --> read 
+	w --> write 
+	x --> execute
+
+Users:
+	u  --> User 
+	g  --> Group 
+	o  --> Others
+	
+	using chmod you can change the permission settings of a files/directories 
+	
+	+ --> adding or granting permissions
+	- --> removing or denying permissions
+	= --> assiging exact permission 
+
+Syntax:
+	chmod user+=-permissions files/directories
+	
+	for example:
+		chmod u+x,g+wx,o-r newFile 
+			
+	using octal representation:
+	---------------------------
+		r --> 100 --> 4 
+		w --> 010 --> 2
+		x --> 001 --> 1
+		
+		rwx 
+		111 --> 7
+		r-- 
+		100 --> 4
+		rw- 
+		110 --> 6
+		r-x 
+		101 --> 5 
+		
+	sudo chown ownername file(s)/directories
+	chgrp groupname files/directories	
+
+Remote System Access
+	telnet ---> Initial Remote login 
+	rlogin ---> Remote login with simple encryption
+	ssh ---> Secured Shell (S Sh) --> 
+
+	Initially ssh client was not provided in Windows. Third party tools like putty, xterm were used.
+
+	scp sudhakar@192.168.1.8:forTwo.sh .
+
+	scp -r sudhakar@192.168.1.8:*.tgz .
+==========================================================
+ssh-keygen [-t dsa | ecdsa | ed25519 | rsa] 
+=========================================================
