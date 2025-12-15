@@ -1,0 +1,308 @@
+Day 3:
+------
+	Data Types and Declaration
+		Working with Strings and Numbers
+	Control Structures and Functions
+		Control Structures
+		Conditional Statements (if, then, else, elif)
+		Loop Structures (for, while, until)
+		Case Statements
+	Functions in Bash
+		Defining and Calling Functions
+		Function Parameters and Return Values
+		Scope of Variables in Functions
+	Advanced Scripting Techniques
+		Advanced Bash Features
+		Arrays and Associative Arrays
+	Reading and Writing Files
+		Redirecting Input and Output
+		Using Pipes and Filters
+		Error Handling
+		Exit Status of Commands
+		Trap Statements for Error Detection
+	Debugging Bash Scripts
+	Text Processing Tools
+		Essential Text Processing Commands
+		grep, sed, awk
+		cut, sort, uniq, tr
+	Regular Expressions Basics
+		Using Text Processing Tools in Scripts
+		Integrating grep, sed, awk in Shell Scripts
+		Practical Examples of Text Processing
+========================================================
+echo "Is used to print on the screen"
+
+read var --> will accept keyboard input from user.
+--------
+when you create a variable- It is local (user defined variable).
+
+In order to create variables that are accessible inside your shell scripts, then you have to export the variable.
+
+When a variable is exported it becomes an environment variable.
+---------------------------------------------------------
+1. Write a script to Accept a value from user and print it.
+
+var=value #
+------
+If you want to perform calculations then it should be numbers.
+In olden days(sh (Bourne shell))..
+	they used 
+		expr command for integer arithmetic operations
+	and 
+		bc for floating point operations
+	
+	Later in csh, ksh and bash you can find let command. 
+	
+		let expression 
+		or 
+		((expression))
+			Here double parenthesis is an alternative syntax to let command.
+		
+2.	Accept two values from the user, and expression from the user and print the result 
+
+let command supports all the numerical operations of C lang.
+
+	1. Arithmetic +, -, *, /, %
+	2. Relational  <, >, <=, >=, ==, !=
+	3. Increment/Decrement ++, --
+	4. logical &&, ||, !
+	5. Bitwise &, |, <<, >>, ~, ^
+=========================================
+If you want to perform comparison on string then go for test command.
+	there is also an alternative syntax to test command. 
+	i.e., [ command ].
+	
+	Here Square bracket is used as an alternative to test command.
+	
+	test -z "$var"
+		returns true if string is null 
+		
+	test -n "$var"
+		returns true if string is NOT null 
+	
+	test "$varOne" = "$varTwo"
+		compares two strings for equality
+	
+	[ "$varOne" != "$varTwo" ]
+		compares two strings for Not-equal
+	
+	You can use test command to perform operations on files as well.
+	
+	[ -e filename ]
+		returns true if file exists
+	
+	[ -f filename ]
+		returns true if file exists and is a normal/regular file.
+	
+	[ -d filename ]
+		returns true if file exists and is a directory.
+	
+	Plenty of other options available with test command. You can refer to manual page.	
+	
+	Test command can also be used to compare numbers 
+		-eq --> equal to 
+		-ne --> NOT equal to 
+		-gt --> greater than
+		-ge --> greater than equal to 
+		-lt --> less than 
+		-le --> less than equal to 
+---------------------------------------------------------
+
+Remember, whether it is let or test command, where is it useful.
+
+	if command (comparison command (let or test))
+	then	
+		command
+		command
+	fi  
+
+	if command (comparison command (let or test))
+	then	
+		command
+		command
+	else
+		command
+		command
+	fi  
+	
+	if command
+	then
+		command
+		command
+	elif command 
+	then 
+		command
+		command
+	else
+		command
+		command
+	fi 
+	
+3. accept a number, check whether the number is even or odd.
+4. Check whether a file exist and it is regular file or directory.
+
+
+Loops in Bash:
+	Traditional loops:
+		using a  variable, checking for the conditions, updating the variable.
+		cnt = 1
+		while ((cnt <= 10)) # condition is true 
+		do 
+			echo -n "$cnt"
+			((cnt++))
+		done 
+		
+			
+		until --> condition is false 
+	
+	if you have a collection, you can go 
+		for loop.
+		
+			for var in collection
+			do 
+				commands 
+			done 
+==================================================
+5. Accept a num: 100
+Even: 100 102 104 106 108
+Accept a num: 101
+Odd: 101 103 105 107 109
+
+6. 	Folder name as input. get all files and sub-folder names from the given folder and print the same 
+Enter folderName:	. (current directory.)
+	P1    	Is a File 
+	fileName Is a File     
+	forOne.sh  Is a File 
+	newDir   Is a Folder
+  
+Command Substitution operator:
+------------------------------
+	`ls $folderName` # back quote . key above tab key.
+	$(ls $folderName) can also be used 
+========================================================
+
+Case Statements:
+----------------
+	case $var in 
+	1)
+		#option #1 command here 
+		;; # ;;(double semi-colon) means break here 
+	2)
+		#option #1 command here 
+		;; # ;;(double semi-colon) means break here 
+	3)
+		#option #1 command here 
+		;; # ;;(double semi-colon) means break here 
+	*)		
+		#option Default command here 
+		;; # ;;(double semi-colon) means break here 
+	esac #case in reverse order 
+--------------------------------------------------------
+7. Update the second program, where you take num1, num2 and operators like (+,  -, *, / , %)
+	print the result.
+	
+Every script you run is not executed in the shell where you run your script. 
+
+Your shell creates a new shell session called child shell under which your script is executed.
+
+So what ever variable or function you create in a session is available to that session only not to its child or grand child.
+
+We call them as session specific variable or function.
+------------------------------------------------------------
+if you want to run a script using 
+	./scriptName 
+		the first line #! (hash shebang) with first 2 bytes as # and !. you specify the shell path like /bin/bash 
+		or /bin/sh or /usr/bin/ksh to say which shell session to be created when child session is created.		
+		
+	#!/usr/bin/python3
+============================================================
+	https://cloud2.rpsconsulting.in/console/#
+============================================================
+Built-in variables:
+-------------------
+	0 to 9 --> Positional parameters 
+		which we access thru $0, $1, $2... $9
+	# --> Total number of arguments 
+	@ --> List of arguments 
+	* --> List of arguments
+	? --> Exit status of the last command 
+	$ --> PID of the current process
+		We access thru $#, $@, $*, $?, $$
+============================================================
+command line arguments:
+-----------------------
+Advanced Features
+	Arrays and Associative
+	
+Redirecting Input and Output.
+----------------------------
+	< 		--> Input (read) mode
+	>		--> Output (write) mode 
+	>> 		--> Output (append) mode 
+	
+	0		--> stdin (Keyboard)
+	1		--> stdout  (terminal)
+	2		--> stderr (terminal)
+--------------------------------------------------
+
+Reading from and Writing to Files.
+----------------------------------
+	using redirection 
+	
+	
+	command piping:
+	---------------
+		command1 | command2 
+			Output of the first command is used as input for the second command. 
+			
+			first command's output is sent to the output device(stdout) which in turn is stored in the pipe, where second command is forced to take input from standard input device(stdin) which in turn is reading from the pipe. 
+
+		The commands that can be used on the right hand side of the pipe (i.e., second command) is referred to as the filter command.
+
+	Commonly used filter commands:
+	----------------------------=
+		wc   ---> Word count 
+		sort --> Sorting data line by line or column wise
+		cut  --> extracting certain column from a line 
+		uniq ---> removes duplicates
+		more --> viewing large file contents page by page(one way)
+		
+		less --> viewing large file contents page by page (two way)
+		
+		cat --> concatinating files 
+		
+		grep --> global Regular Expression print
+		sed --> streamline editor
+		awk --> 
+		
+Regular expression:
+-------------------
+	^Word --> begining of the line 
+	Word$ --> End of the line 
+	^Word$ --> first and last word in the line.
+	
+	AWK --> Al Aho, Peter Weinberger, Brian Kerningham 
+	
+==========================================================
+"Assignment 1: Ensure the script checks if a specific file (e.g., myfile.txt) exists in the current directory. If it exists, print ""File exists"", otherwise print ""File not found"".
+
+Assignment 2: Write a script that reads numbers from the user until they enter '0'. The script should also print whether each number is odd or even.
+
+Assignment 3: Create a function that takes a filename as an argument and prints the number of lines in the file. Call this function from your script with different filenames.
+
+Assignment 4: Write a script that creates a directory named TestDir and inside it, creates ten files named File1.txt, File2.txt, ... File10.txt. Each file should contain its filename as its content (e.g., File1.txt contains ""File1.txt"").
+
+Assignment 5: Modify the script to handle errors, such as the directory already existing or lacking permissions to create files.
+Add a debugging mode that prints additional information when enabled.
+
+Assignment 6: Given a sample log file, write a script using grep to extract all lines containing ""ERROR"". Use awk to print the date, time, and error message of each extracted line.
+Data Processing with sed
+
+Assignment 7: Create a script that takes a text file and replaces all occurrences of ""old_text"" with ""new_text"". Use sed to perform this operation and output the result to a new file.
+
+Submission Guidelines:
+1. Ensure that each answer is clear, concise, and reflects an understanding of the core concepts.
+2. Diagrams can be hand-drawn and scanned or created using any digital drawing tool.
+3. Provide references for any external sources used.
+Submit your work in a single PDF document by end of Module."
+
