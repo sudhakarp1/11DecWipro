@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "Welcome to shell Scripting"
+date 
+ls
+echo "Value of the var is $var"
+ps f

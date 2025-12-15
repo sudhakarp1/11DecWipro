@@ -1,0 +1,5 @@
+#!/usr/bin/python3
+
+
+a,b,c=10,'sudhakar P', 123.345
+print(f'printing variables a:{a}  b: {b}  c: {c}')

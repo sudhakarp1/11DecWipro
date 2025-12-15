@@ -1,0 +1,2 @@
+cat: output.txt: No such file or directory
+cat: file123ed: No such file or directory

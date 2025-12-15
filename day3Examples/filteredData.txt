@@ -1,0 +1,10 @@
+-rw-r--r--,1,sudhakar,test,414,Nov,20,09:25,loggingTwo.py
+-rwxr-xr-x,1,sudhakar,test,93,Dec,15,12:04,myScript
+drwxr-xr-x,1,sudhakar,test,512,Dec,15,10:36,newDir
+-rw-r-----,1,sudhakar,test,59,Dec,11,16:32,newFile
+-rw-r--r--,1,sudhakar,test,0,Dec,15,16:48,output.txt
+-rw-r--r--,1,sudhakar,test,85,Nov,20,09:21,output1.txt
+-rwxr-xr-x,1,sudhakar,test,103,Dec,15,12:20,testOne
+-rwxr-xr-x,1,sudhakar,test,89,Dec,15,10:28,untilOne.sh
+-rwxr-xr-x,1,sudhakar,test,115,Dec,15,14:16,usingFunDemo.sh
+-rwxr-xr-x,1,sudhakar,test,90,Dec,15,10:26,whileOne.sh
